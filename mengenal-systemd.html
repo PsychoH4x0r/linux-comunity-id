@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mengenal systemd - Linux Community ID</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/themes.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    .linux-logo-css {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      background: linear-gradient(135deg, #333 0%, #555 100%);
+      border-radius: 50% 50% 45% 55% / 60% 60% 40% 40%;
+      box-shadow:
+        inset 8px 0 10px #222,
+        inset -8px 0 10px #666;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .linux-logo-css::before {
+      content: '🐧';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      font-size: 28px;
+      filter: drop-shadow(1px 1px 0 #0008);
+      user-select: none;
+    }
+    .article-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary, #ff0000);
+    }
+    .article-content h1, .article-content h2, .article-content h3 {
+      font-weight: 700;
+      margin-top: 1.5rem;
+      color: var(--text-accent, #0066cc);
+    }
+    pre {
+      background: var(--code-bg, #f4f4f4);
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+    }
+    code {
+      font-family: monospace;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar" role="banner">
+    <div class="container navbar-container" style="display:flex; align-items:center; justify-content:space-between; padding:0 1rem; background:#eee;">
+      <div class="logo" aria-label="Linux Community ID Logo" style="display:flex; align-items:center;">
+        <a href="../index.html" style="color:inherit; text-decoration:none; font-weight:700; font-size:1.1rem; display:flex; align-items:center;">
+          <span class="linux-logo-css" aria-hidden="true"></span>
+          Linux Community ID
+        </a>
+      </div>
+      <nav role="navigation" aria-label="Primary Navigation">
+        <ul class="nav-list" style="list-style:none; display:flex; gap:1rem; margin:0; padding:0;">
+          <li><a href="../index.html" class="nav-link" style="text-decoration:none; color:#333;">Beranda</a></li>
+          <li><a href="#" class="nav-link active" style="text-decoration:none; color:#0066cc; font-weight:700;">Artikel</a></li>
+          <li><a href="../about.html" class="nav-link" style="text-decoration:none; color:#333;">Tentang</a></li>
+          <li><a href="../index.html#faq" class="nav-link" style="text-decoration:none; color:#333;">FAQ</a></li>
+          <li><a href="../index.html#kontak" class="nav-link btn-primary" style="text-decoration:none; color:#fff; background:#0066cc; padding:0.3rem 0.6rem; border-radius:4px;">Kontak</a></li>
+          <li><button id="theme-toggle" aria-label="Toggle Dark Mode" class="btn-theme" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">🌓</button></li>
+        </ul>
+      </nav>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu" class="mobile-menu-btn" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">☰</button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="mobile-menu hidden" aria-hidden="true" style="background:#eee; padding:1rem;">
+    <nav role="navigation" aria-label="Mobile Navigation">
+      <ul class="mobile-nav-list" style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem;">
+        <li><a href="../index.html" class="nav-link">Beranda</a></li>
+        <li><a href="#" class="nav-link active">Artikel</a></li>
+        <li><a href="../about.html" class="nav-link">Tentang</a></li>
+        <li><a href="../index.html#faq" class="nav-link">FAQ</a></li>
+        <li><a href="../index.html#kontak" class="nav-link btn-primary">Kontak</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="container article-content" role="main" tabindex="0">
+    <h1>Mengenal systemd: Init System Modern Linux</h1>
+    <p>Systemd adalah sistem init yang modern dan banyak digunakan di distribusi Linux populer saat ini. Ia menggantikan sistem init tradisional seperti SysVinit dan Upstart dengan fitur yang lebih lengkap dan efisien.</p>
+
+    <h2>Sejarah dan Latar Belakang systemd</h2>
+    <p>Systemd diperkenalkan oleh Lennart Poettering dan Kay Sievers pada tahun 2010 untuk menyederhanakan proses booting dan manajemen layanan pada Linux. Ini adalah jawaban atas kekurangan sistem init lama yang kurang modular dan sulit dikembangkan.</p>
+
+    <h2>Fungsi Utama systemd</h2>
+    <ul>
+      <li><strong>Manajemen layanan (services)</strong> – Memulai, menghentikan, dan mengatur layanan sistem secara paralel untuk mempercepat boot.</li>
+      <li><strong>Manajemen sesi dan user</strong> – Mengelola sesi pengguna dan kontrol akses.</li>
+      <li><strong>Manajemen perangkat</strong> – Integrasi dengan udev untuk manajemen perangkat keras.</li>
+      <li><strong>Logging</strong> – Menyediakan journal (systemd-journald) untuk pencatatan log yang terpusat.</li>
+      <li><strong>Socket activation</strong> – Memulai layanan saat socket menerima koneksi.</li>
+      <li><strong>Timer</strong> – Menjadwalkan tugas yang menggantikan cron untuk beberapa kasus.</li>
+    </ul>
+
+    <h2>Komponen Penting systemd</h2>
+    <ul>
+      <li><strong>systemd</strong> – Proses init utama (PID 1) yang mengatur boot dan layanan.</li>
+      <li><strong>systemctl</strong> – Utilitas baris perintah untuk mengontrol systemd dan layanan.</li>
+      <li><strong>journald</strong> – System log daemon untuk pencatatan log sistem.</li>
+      <li><strong>loginctl</strong> – Mengelola sesi login user dan seat.</li>
+      <li><strong>timedated, localed, hostnamectl</strong> – Manajemen waktu, lokal, dan hostname.</li>
+    </ul>
+
+    <h2>4 Cara Utama Mengelola systemd</h2>
+
+    <h3>Cara 1: Mengelola Layanan dengan systemctl</h3>
+    <p>Ini adalah cara paling dasar dan sering digunakan untuk mengontrol layanan sistem.</p>
+    <pre><code>
+# Melihat status layanan
+systemctl status nama-layanan
+
+# Memulai layanan
+sudo systemctl start nama-layanan
+
+# Menghentikan layanan
+sudo systemctl stop nama-layanan
+
+# Restart layanan
+sudo systemctl restart nama-layanan
+
+# Mengaktifkan layanan agar start otomatis saat boot
+sudo systemctl enable nama-layanan
+
+# Menonaktifkan layanan saat boot
+sudo systemctl disable nama-layanan
+    </code></pre>
+
+    <h3>Cara 2: Menggunakan systemd-analyze untuk Analisis Boot</h3>
+    <p>Mengetahui waktu boot dan menganalisis masalah startup.</p>
+    <pre><code>
+# Melihat waktu boot keseluruhan
+systemd-analyze
+
+# Menampilkan grafik startup dalam bentuk SVG
+systemd-analyze plot > boot.svg
+
+# Melihat blame list layanan yang lambat
+systemd-analyze blame
+    </code></pre>
+
+    <h3>Cara 3: Memantau Log dengan journalctl</h3>
+    <p>Systemd menggunakan journald sebagai system log, kamu bisa melihat log sistem dengan journalctl.</p>
+    <pre><code>
+# Melihat log semua sistem
+journalctl
+
+# Melihat log layanan tertentu
+journalctl -u nama-layanan
+
+# Melihat log boot saat ini
+journalctl -b
+
+# Melihat log realtime (live)
+journalctl -f
+    </code></pre>
+
+    <h3>Cara 4: Membuat dan Mengelola Timer systemd</h3>
+    <p>Timer systemd bisa menggantikan cron job untuk menjadwalkan tugas.</p>
+    <pre><code>
+# Contoh file timer: backup.timer
+[Unit]
+Description=Jalankan backup setiap hari jam 2 pagi
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
+# Contoh file service: backup.service
+[Unit]
+Description=Backup data penting
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/backup.sh
+
+# Perintah enable dan start timer
+sudo systemctl enable backup.timer
+sudo systemctl start backup.timer
+    </code></pre>
+
+    <h2>Keunggulan systemd dibanding Init Tradisional</h2>
+    <ul>
+      <li>Booting lebih cepat dengan parallel service startup.</li>
+      <li>Logging terpusat dan terstruktur dengan systemd-journald.</li>
+      <li>Manajemen dependensi antar layanan lebih baik.</li>
+      <li>Menyediakan API dan tools lengkap untuk pengembang.</li>
+      <li>Dukungan socket activation dan timer yang fleksibel.</li>
+    </ul>
+
+    <h2>Kritik dan Kontroversi</h2>
+    <p>Meski powerful, systemd mendapat kritik karena kompleksitas dan sifatnya yang "monolitik", sehingga tidak semua pengguna atau distribusi Linux menyukainya. Beberapa distro seperti Devuan bahkan memilih tetap menggunakan sysvinit atau alternatif lain.</p>
+
+    <h2>Kesimpulan</h2>
+    <p>Systemd adalah evolusi penting dalam manajemen sistem Linux yang menawarkan kemudahan dan efisiensi, terutama pada distribusi besar seperti Fedora, Ubuntu, Debian, dan Arch Linux. Memahami systemd sangat penting untuk administrator sistem modern.</p>
+
+    <p><a href="../index.html" class="btn-secondary" style="display:inline-block; margin-top:2rem; padding:0.6rem 1rem; background:#0066cc; color:#fff; border-radius:4px; text-decoration:none;">← Kembali ke Beranda</a></p>
+  </main>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', !isHidden);
+      mobileMenu.setAttribute('aria-hidden', isHidden ? 'false' : 'true');
+    });
+
+    // Theme toggle dark/light
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+    });
+  </script>
+</body>
+</html>

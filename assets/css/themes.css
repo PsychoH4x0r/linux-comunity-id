@@ -1,0 +1,128 @@
+/* SMOOTH & MODERN CSS THEME - ENHANCED */
+:root {
+  --bg: #fefefe;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --accent: #38bdf8;
+  --btn-text: #ffffff;
+  --btn-secondary-bg: #1d4ed8;
+  --btn-secondary-hover: #1e40af;
+  --header-bg: #ffffffd0;
+  --features-bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  --card-shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.1);
+  --border: #e2e8f0;
+  --hero-text: #0f172a;
+  --glass: rgba(255, 255, 255, 0.75);
+  --backdrop-blur: blur(8px);
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 14px;
+}
+
+[data-theme='dark'] {
+  --bg: #0f172a;
+  --text: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --primary: #60a5fa;
+  --primary-hover: #3b82f6;
+  --accent: #38bdf8;
+  --btn-text: #0f172a;
+  --btn-secondary-bg: #3b82f6;
+  --btn-secondary-hover: #2563eb;
+  --header-bg: #1e293bd0;
+  --features-bg: #1e293b;
+  --card-bg: #1e293b;
+  --card-shadow: 0 10px 20px rgba(255, 255, 255, 0.05);
+  --card-shadow-hover: 0 12px 24px rgba(255, 255, 255, 0.1);
+  --border: #334155;
+  --hero-text: #e2e8f0;
+  --glass: rgba(30, 41, 59, 0.75);
+  --backdrop-blur: blur(8px);
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 14px;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color var(--transition), color var(--transition);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  line-height: 1.7;
+}
+
+/* THEME TOGGLE BUTTON */
+button#theme-toggle {
+  font-size: 1.4rem;
+  background: linear-gradient(145deg, var(--primary), var(--accent));
+  color: var(--btn-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform var(--transition), background-color var(--transition), box-shadow var(--transition);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+}
+
+button#theme-toggle:hover {
+  transform: scale(1.05);
+  background: linear-gradient(145deg, var(--primary-hover), var(--accent));
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* BACKDROP HEADER EXAMPLE */
+.glass-header {
+  background: var(--glass);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ANIMATED SHADOW */
+.animated-glow {
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.animated-glow:hover {
+  box-shadow: 0 0 12px 4px var(--primary);
+}
+
+/* UTILITY CLASSES */
+.radius {
+  border-radius: var(--radius);
+}
+
+.shadow {
+  box-shadow: var(--card-shadow);
+}
+
+.shadow-hover:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+  color: var(--btn-text);
+}
+
+.bg-glass {
+  background: var(--glass);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+}

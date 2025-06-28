@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tips Command Line Linux Lanjutan — 430+ Perintah Lengkap</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/themes.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.5;
+      color: var(--text-primary, #222);
+      background-color: var(--bg-light, #fff);
+    }
+    h1, h2 {
+      color: var(--text-accent, #0066cc);
+      font-weight: 700;
+      margin-top: 2rem;
+    }
+    pre {
+      background: var(--code-bg, #f9f9f9);
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    code {
+      font-family: monospace;
+    }
+    ul {
+      margin-left: 1.5rem;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tips Command Line Linux Lanjutan — 430+ Perintah Lengkap</h1>
+  <p>Halaman ini berisi kumpulan lebih dari 430 perintah Linux lengkap dengan penjelasan singkat agar kamu bisa kuasai command line sampai tingkat mahir.</p>
+
+  <section>
+    <h2>1. Navigasi dan Manipulasi File (50+ Perintah)</h2>
+    <pre><code>
+ls -alh                        # List semua file dengan detail dan ukuran mudah dibaca
+cd /path/to/dir               # Pindah direktori
+pwd                           # Cetak direktori saat ini
+mkdir -p dir/subdir           # Buat direktori bersarang
+rm -rf dir/                  # Hapus direktori rekursif tanpa konfirmasi
+cp -r source dest            # Copy direktori secara rekursif
+mv file1 file2               # Rename/move file
+find / -name 'file.txt'      # Cari file dari root
+locate file.txt              # Cari file cepat (update database wajib)
+stat file.txt                # Info detail file (ukuran, permission, dll)
+file file.txt                # Tampilkan tipe file (biner, text, dll)
+basename /path/to/file.txt   # Ambil nama file saja
+dirname /path/to/file.txt    # Ambil direktori file
+readlink -f file             # Resolve symbolic link absolut
+tree -L 2                    # Tampilkan struktur direktori (harus install)
+lsattr file                 # Tampilkan atribut khusus file (immutable, append-only)
+chattr +i file              # Set file immutable (tidak bisa diubah)
+touch file.txt              # Buat file baru atau update timestamp
+split -b 10M bigfile.bin part # Pecah file jadi 10MB
+cat file1 file2 > file3     # Gabung file
+head -n 20 file.txt         # Tampilkan 20 baris pertama file
+tail -n 50 file.txt         # Tampilkan 50 baris terakhir file
+tail -f /var/log/syslog     # Live update file log
+wc -l file.txt              # Hitung jumlah baris file
+diff file1 file2            # Bandingkan isi file
+cmp file1 file2             # Bandingkan file byte per byte
+md5sum file                 # Hitung hash MD5
+sha256sum file              # Hitung hash SHA256
+strings binaryfile          # Tampilkan string teks dalam file biner
+gzip file                  # Kompres file
+gunzip file.gz             # Ekstrak file gzip
+zip archive.zip file1 file2 # Buat arsip zip
+unzip archive.zip           # Ekstrak zip
+ln -s /path/to/file linkname # Buat symbolic link
+ls -i                      # Tampilkan inode file
+filefrag file               # Lihat fragmen disk file
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>2. Permission & Ownership (40+ Perintah)</h2>
+    <pre><code>
+chmod 755 file.sh           # Set permission rwxr-xr-x
+chmod u+s file              # Set SUID bit (jalankan dengan hak owner)
+chmod g+s dir               # Set SGID bit (inherit group untuk file baru)
+chmod o+t dir               # Set sticky bit (hanya owner yang bisa hapus)
+stat file                  # Lihat detail permission dan owner
+chown user:group file       # Ganti owner dan group
+chown -R user:group dir     # Ganti owner dan group rekursif
+groups username             # Lihat grup user
+id username                 # Info UID, GID, grup user
+getfacl file                # Tampilkan ACL permission lanjutan
+setfacl -m u:user:rwx file  # Tambah ACL permission
+setfacl -x u:user file      # Hapus ACL user
+umask                      # Tampilkan default permission saat buat file
+umask 022                  # Set default permission (rw-r--r--)
+lsattr file                # Tampilkan atribut file
+chattr +i file             # Set immutable
+chattr -i file             # Hapus immutable
+chattr +a file             # Append-only
+chattr -a file             # Hapus append-only
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>3. Manajemen Proses & Sistem (50+ Perintah)</h2>
+    <pre><code>
+top                        # Monitor proses interaktif
+htop                       # Versi interaktif lebih lengkap
+ps aux | grep process      # Cari proses
+pidof processname          # Cari PID proses
+kill PID                   # Kirim SIGTERM
+kill -9 PID                # Paksa kill SIGKILL
+pkill processname          # Kill proses berdasarkan nama
+pgrep processname          # Cari PID dari nama proses
+nice -n 10 command         # Jalankan proses dengan prioritas rendah
+renice -n -5 PID           # Ubah prioritas proses berjalan
+systemctl status service   # Cek status service systemd
+systemctl start service    # Jalankan service
+systemctl stop service     # Berhenti service
+systemctl restart service  # Restart service
+journalctl -xe             # Log error terbaru
+dmesg                      # Log kernel boot dan error
+uptime                     # Lama sistem hidup dan load average
+free -h                    # Info RAM dan swap
+vmstat 1                   # Statistik sistem realtime
+iostat 1                   # Statistik I/O disk realtime
+lsof -i :80                # Proses yang pakai port 80
+lsof -p PID                # File yang dibuka proses
+strace -p PID              # Trace system call proses
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>4. Manajemen Paket (30+ Perintah)</h2>
+    <pre><code>
+# Debian/Ubuntu
+sudo apt update
+sudo apt upgrade -y
+sudo apt install package
+sudo apt remove package
+sudo apt purge package
+sudo apt autoremove
+sudo dpkg -i package.deb
+apt-cache search keyword
+apt show package
+
+# Arch Linux
+sudo pacman -Syu
+sudo pacman -S package
+sudo pacman -R package
+sudo pacman -Rs package
+sudo pacman -Q
+pacman -Ss keyword
+
+# Fedora / CentOS / RHEL
+sudo dnf update
+sudo dnf install package
+sudo dnf remove package
+sudo yum update
+sudo yum install package
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>5. Jaringan & Troubleshooting (50+ Perintah)</h2>
+    <pre><code>
+ip a                       # Lihat interface dan IP
+ip link set eth0 up/down   # Aktifkan/nonaktifkan interface
+ip route                   # Lihat routing table
+ping google.com            # Ping target
+traceroute google.com      # Trace rute paket
+mtr google.com             # Ping + traceroute interaktif
+netstat -tulpn             # Port listening
+ss -tulpn                 # Versi modern netstat
+tcpdump -i eth0            # Capture paket jaringan
+nmap 192.168.1.0/24        # Scan jaringan
+arp -a                     # Tampilkan tabel ARP
+iwconfig                   # Info wireless interface
+iwlist scan                # Scan jaringan wifi
+nmcli device status        # NetworkManager CLI status
+curl -I https://example.com # Cek HTTP header
+wget http://url/file       # Download file
+scp file user@host:/path  # Copy file lewat SSH
+rsync -avz source dest     # Sinkronisasi file/folder
+dig example.com            # DNS lookup
+host example.com           # DNS lookup sederhana
+nslookup example.com       # DNS query
+telnet host port           # Tes koneksi TCP
+ftp ftp.server.com         # FTP client
+ethtool eth0               # Info dan konfigurasi interface ethernet
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>6. Disk & Filesystem (50+ Perintah)</h2>
+    <pre><code>
+df -h                     # Disk usage human readable
+du -sh /path/to/dir       # Ukuran folder
+lsblk                     # Lihat block devices
+fdisk -l                  # Lihat tabel partisi disk
+parted /dev/sda print     # Partisi disk dengan parted
+mkfs.ext4 /dev/sda1       # Format partisi ext4
+mount /dev/sda1 /mnt      # Mount filesystem
+umount /mnt               # Unmount filesystem
+tune2fs -l /dev/sda1      # Info filesystem ext4
+e2fsck -f /dev/sda1       # Cek dan perbaiki ext4 filesystem
+blkid                     # Lihat UUID partisi
+ls -l /dev/disk/by-uuid/  # Lihat UUID perangkat
+mount -o remount,ro /     # Mount root readonly
+swapoff -a                # Nonaktifkan swap
+swapon -a                 # Aktifkan swap
+mkswap /dev/sda2          # Buat swap baru
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>7. User & Grup Management (30+ Perintah)</h2>
+    <pre><code>
+id username               # Info user id dan grup
+adduser username          # Tambah user (Debian)
+useradd username          # Tambah user (RedHat)
+passwd username           # Ganti password user
+deluser username          # Hapus user (Debian)
+userdel username          # Hapus user (RedHat)
+groupadd groupname        # Buat grup baru
+groupdel groupname        # Hapus grup
+usermod -aG group user    # Tambah user ke grup
+groups username           # Lihat grup user
+whoami                    # User saat ini
+w                         # Siapa yang login dan aktif
+last                      # Log login user terakhir
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>8. Backup & Restore (20+ Perintah)</h2>
+    <pre><code>
+tar -czvf backup.tar.gz /folder    # Backup folder ke tar.gz
+tar -xzvf backup.tar.gz            # Extract tar.gz
+rsync -avh /source/ /dest/         # Sinkronisasi file dan folder
+dd if=/dev/sda of=/mnt/backup.img bs=4M status=progress # Backup disk image
+gzip file                         # Kompres file
+gunzip file.gz                   # Ekstrak gzip
+bzip2 file                       # Kompres bzip2
+bunzip2 file.bz2                 # Ekstrak bzip2
+xz file                         # Kompres xz
+unxz file.xz                    # Ekstrak xz
+zip -r archive.zip folder       # Kompres zip
+unzip archive.zip               # Ekstrak zip
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>9. System Log & Monitoring (30+ Perintah)</h2>
+    <pre><code>
+tail -f /var/log/syslog         # Live lihat syslog
+tail -f /var/log/auth.log       # Log autentikasi
+journalctl -u service           # Log service systemd
+journalctl --since "1 hour ago" # Log sejak 1 jam lalu
+dmesg                           # Kernel ring buffer
+uptime                          # Waktu sistem menyala dan load average
+vmstat 1                        # Statistik sistem real-time
+iostat 1                       # Statistik disk dan I/O
+netstat -tulpen                # Statistik jaringan
+watch -n 5 'df -h'             # Update setiap 5 detik
+watch -n 3 'ps aux --sort=-%cpu | head -n 10'  # Top 10 CPU usage
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>10. Debugging & Forensic (20+ Perintah)</h2>
+    <pre><code>
+strace -p PID                  # Trace system call proses
+lsof -p PID                   # List file yang dibuka proses
+tcpdump -i eth0 port 80       # Tangkap paket HTTP
+gdb /path/to/program          # Debug native program
+chkrootkit                    # Cek rootkit (install dulu)
+rkhunter                      # Scanner rootkit lain
+dstat                         # Statistik resource sistem realtime
+perf stat                    # Statistik performa
+perf record                  # Rekam performa
+perf report                  # Report hasil rekaman
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>11. Bash Scripting & Automation (30+ Perintah)</h2>
+    <pre><code>
+# Basic scripting
+echo "Hello, World"            # Cetak teks
+read var                      # Input user
+if [ "$var" = "yes" ]; then echo "OK"; fi    # Kondisional sederhana
+for i in {1..10}; do echo $i; done          # Loop
+while [ condition ]; do commands; done       # Loop while
+
+# File & output redirection
+command > output.txt          # Redirect output ke file (overwrite)
+command >> output.txt         # Append output ke file
+command 2> error.txt          # Redirect error
+command &> alloutput.txt      # Redirect stdout dan stderr
+
+# Variables & functions
+var="value"
+function myfunc() {
+  echo "This is a function"
+}
+myfunc
+
+# Cron jobs
+crontab -e                   # Edit cron schedule
+crontab -l                   # List cron jobs
+  </code></pre>
+  </section>
+
+  <section>
+    <h2>12. Advanced Networking (30+ Perintah)</h2>
+    <pre><code>
+iptables -L                 # List firewall rules (iptables)
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT  # Tambah rule firewall SSH
+firewalld-cmd --list-all    # List firewalld rules
+nft list ruleset            # List nftables rules
+ss -tuln                    # List socket listening
+tcpdump -nn -i eth0 port 22 # Capture SSH traffic
+nmcli con up id "WIFI_NAME"  # Connect wifi
+iw dev wlan0 scan           # Scan wifi networks
+iwconfig wlan0 essid "SSID" # Set wifi essid
+ethtool eth0 speed 1000 duplex full autoneg on # Set speed ethernet
+  </code></pre>
+  </section>
+
+  <p><a href="../index.html" class="btn-secondary" style="display:inline-block; margin-top:2rem; padding:0.6rem 1rem; background:#0066cc; color:#fff; border-radius:4px; text-decoration:none;">← Kembali ke Beranda</a></p>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Review Distro Linux 2025 - Linux Community ID</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/themes.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Logo CSS Linux */
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .logo-linux {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      background: linear-gradient(135deg, #555, #222);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      box-shadow:
+        inset 0 4px 5px rgba(255,255,255,0.2),
+        0 2px 6px rgba(0,0,0,0.8);
+    }
+
+    .logo-linux::before,
+    .logo-linux::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      background-color: #000;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    .logo-linux::before {
+      left: 10px;
+    }
+
+    .logo-linux::after {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar" role="banner">
+    <div class="container navbar-container">
+      <div class="logo" aria-label="Linux Community ID Logo">
+        <a href="../index.html" class="logo-link" aria-label="Home">
+          <div class="logo-linux"></div>
+          <span>Linux Community ID</span>
+        </a>
+      </div>
+      <nav role="navigation" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link">Beranda</a></li>
+          <li><a href="#" class="nav-link">Artikel</a></li>
+          <li><a href="../about.html" class="nav-link">Tentang</a></li>
+          <li><a href="../index.html#faq" class="nav-link">FAQ</a></li>
+          <li><a href="../index.html#kontak" class="nav-link btn-primary">Kontak</a></li>
+          <li><button id="theme-toggle" aria-label="Toggle Dark Mode" class="btn-theme">🌓</button></li>
+        </ul>
+      </nav>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu" class="mobile-menu-btn">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container article-content" role="main">
+    <h1>Review Distro Linux 2025</h1>
+    <p>Tahun 2025 membawa berbagai perkembangan menarik di dunia distribusi Linux. Berikut beberapa distro yang layak dicoba dengan fitur dan keunggulan terbaru:</p>
+
+    <h2>1. Arch Linux</h2>
+    <p>Arch Linux tetap menjadi pilihan favorit bagi pengguna yang suka sistem rolling release dengan kontrol penuh. Update paket yang cepat dan dokumentasi Arch Wiki yang sangat lengkap menjadi nilai plus utama.</p>
+
+    <h2>2. Ubuntu 24.04 LTS</h2>
+    <p>Ubuntu 24.04 LTS menawarkan stabilitas yang tinggi dengan dukungan jangka panjang. Cocok untuk pengguna yang menginginkan sistem handal untuk desktop dan server tanpa perlu sering upgrade besar.</p>
+
+    <h2>3. Fedora 39</h2>
+    <p>Fedora dikenal dengan teknologi terbaru dan integrasi dengan GNOME versi mutakhir. Fedora 39 membawa peningkatan performa dan fitur baru untuk developer dan pengguna desktop.</p>
+
+    <h2>4. Debian 12 “Bookworm”</h2>
+    <p>Debian 12 membawa stabilitas legendarisnya dengan pembaruan paket dan dukungan hardware yang lebih baik. Ideal untuk server dan pengguna yang mengutamakan kestabilan.</p>
+
+    <h2>5. Pop!_OS 24.04</h2>
+    <p>Pop!_OS menawarkan pengalaman desktop yang dioptimalkan untuk gaming dan produktivitas, dengan dukungan hardware khusus dari System76 dan kemudahan penggunaan yang tinggi.</p>
+
+    <h2>Kesimpulan</h2>
+    <p>Pilih distro yang paling sesuai dengan kebutuhan dan preferensi kamu. Baik Arch yang fleksibel, Ubuntu dan Debian yang stabil, atau Fedora dan Pop!_OS yang inovatif, semuanya punya kelebihan masing-masing.</p>
+
+    <p><a href="../index.html" class="btn-secondary">← Kembali ke Beranda</a></p>
+  </main>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script>
+    // Mobile menu toggle script
+    const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', !isHidden);
+      mobileMenu.setAttribute('aria-hidden', isHidden ? 'false' : 'true');
+    });
+  </script>
+</body>
+</html>

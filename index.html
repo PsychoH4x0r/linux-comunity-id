@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux Community ID — Komunitas Pengguna Linux Profesional</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/themes.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" href="assets/images/favicon.ico" />
+  <style>
+    /* Logo CSS Linux */
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .logo-linux {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      background: linear-gradient(135deg, #555, #222);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      box-shadow:
+        inset 0 4px 5px rgba(255,255,255,0.2),
+        0 2px 6px rgba(0,0,0,0.8);
+    }
+
+    .logo-linux::before,
+    .logo-linux::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      background-color: #000;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    .logo-linux::before {
+      left: 10px;
+    }
+
+    .logo-linux::after {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar" role="banner">
+    <div class="container navbar-container">
+      <div class="logo" aria-label="Linux Community ID Logo">
+        <a href="index.html" class="logo-link" aria-label="Home">
+          <div class="logo-linux"></div>
+          <span>Linux Community ID</span>
+        </a>
+      </div>
+      <nav role="navigation" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Beranda</a></li>
+          <li><a href="distro-review.html" class="nav-link">Artikel</a></li>
+          <li><a href="about.html" class="nav-link">Tentang</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+          <li><a href="#kontak" class="nav-link btn-primary">Kontak</a></li>
+          <li><button id="theme-toggle" aria-label="Toggle Dark Mode" class="btn-theme">🌓</button></li>
+        </ul>
+      </nav>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu" class="mobile-menu-btn">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="mobile-menu hidden" aria-hidden="true">
+    <nav role="navigation" aria-label="Mobile Navigation">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="nav-link">Beranda</a></li>
+        <li><a href="distro-review.html" class="nav-link">Artikel</a></li>
+        <li><a href="about.html" class="nav-link">Tentang</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#kontak" class="nav-link btn-primary">Kontak</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero" role="banner">
+    <div class="container hero-container">
+      <h1>Selamat datang di Komunitas Linux Indonesia</h1>
+      <p>Tempat berkumpul para profesional dan penggemar Linux untuk belajar dan berkontribusi.</p>
+      <a href="#artikel" class="btn-primary hero-btn">Mulai Eksplorasi</a>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features" aria-label="Kenapa bergabung dengan komunitas kami?">
+    <div class="container">
+      <h2>Kenapa Bergabung?</h2>
+      <div class="features-grid">
+        <article class="feature-card" tabindex="0">
+          <h3>Open Source Spirit</h3>
+          <p>Kami mengedepankan prinsip kebebasan perangkat lunak dan kolaborasi terbuka.</p>
+        </article>
+        <article class="feature-card" tabindex="0">
+          <h3>Komunitas Aktif</h3>
+          <p>Diskusi harian, webinar, dan proyek bersama yang mendukung pengembangan skill.</p>
+        </article>
+        <article class="feature-card" tabindex="0">
+          <h3>Materi Eksklusif</h3>
+          <p>Akses ke e-book, tutorial, dan pelatihan yang terus diperbarui secara rutin.</p>
+        </article>
+        <article class="feature-card" tabindex="0">
+          <h3>Kolaborasi Proyek</h3>
+          <p>Kesempatan berkontribusi ke proyek open source dan membangun portofolio.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLES SECTION -->
+  <main id="artikel" class="articles container" role="main">
+    <h2>Artikel Terbaru</h2>
+    <div class="article-grid">
+      <article tabindex="0">
+        <h3><a href="distro-review.html">🔹 Pengantar Linux</a></h3>
+        <p>Pelajari dasar-dasar Linux dan lingkungan terminal dengan mudah dan terstruktur.</p>
+      </article>
+      <article tabindex="0">
+        <h3><a href="distro-review.html">🔹 Review Distro Linux 2025</a></h3>
+        <p>Mengenal berbagai distro Linux terbaru dan kelebihan masing-masing.</p>
+      </article>
+    <article tabindex="0">
+  <h3><a href="command-line-tips.html">🔹 Tips belajar Command-line</a></h3>
+  <p>tips command-line untuk kebutuhan produksi dan hosting.</p>
+</article>
+
+     <article tabindex="0">
+  <h3><a href="mengenal-systemd.html">🔹 Cara Mengelola systemd</a></h3>
+  <p>Mengenal systemd dan cara mengelola layanan sistem Linux dengan systemctl.</p>
+</article>
+
+     <article tabindex="0">
+  <h3><a href="keamanan-linux.html">🔹 Keamanan Linux</a></h3>
+  <p>Langkah-langkah meningkatkan keamanan sistem Linux Anda secara efektif.</p>
+</article>
+
+    <article tabindex="0">
+  <h3><a href="optimasi-server.html">🔹 Tips Optimasi Server</a></h3>
+  <p>Optimalkan performa server Linux untuk kebutuhan produksi dan hosting.</p>
+</article>
+
+    </div>
+  </main>
+
+  <!-- DOWNLOAD DISTRO SECTION -->
+  <section class="download-distros container" aria-label="Download Distribusi Linux dan Unix">
+    <h2>Download Distribusi Linux & Unix</h2>
+    <p>Dapatkan versi terbaru dari distribusi Linux dan sistem operasi Unix berikut secara resmi dan aman:</p>
+    <ul class="distro-list">
+      <li>
+        <strong>Arch Linux</strong> – 
+        <a href="https://archlinux.org/download/" target="_blank" rel="noopener noreferrer">https://archlinux.org/download/</a>
+      </li>
+      <li>
+        <strong>Debian</strong> – 
+        <a href="https://www.debian.org/distrib/" target="_blank" rel="noopener noreferrer">https://www.debian.org/distrib/</a>
+      </li>
+      <li>
+        <strong>Ubuntu</strong> – 
+        <a href="https://ubuntu.com/download" target="_blank" rel="noopener noreferrer">https://ubuntu.com/download</a>
+      </li>
+      <li>
+        <strong>Unix BSD</strong> – 
+        <a href="https://www.freebsd.org/where/" target="_blank" rel="noopener noreferrer">https://www.freebsd.org/where/</a>
+      </li>
+      <li>
+        <strong>OpenIndiana (OpenSolaris)</strong> – 
+        <a href="https://openindiana.org/download" target="_blank" rel="noopener noreferrer">https://openindiana.org/download</a>
+      </li>
+    </ul>
+  </section>
+
+
+
+  <!-- FAQ SECTION -->
+  <section class="faq container" id="faq" aria-label="Frequently Asked Questions">
+    <h2>FAQ</h2>
+    <details>
+      <summary>Apakah komunitas ini gratis untuk semua orang?</summary>
+      <p>Ya, komunitas kami terbuka dan gratis untuk siapa saja yang ingin belajar Linux.</p>
+    </details>
+    <details>
+      <summary>Bagaimana cara bergabung dalam diskusi?</summary>
+      <p>Kamu bisa bergabung melalui forum online dan grup chat kami yang aktif.</p>
+    </details>
+    <details>
+      <summary>Apakah ada pelatihan berbayar?</summary>
+      <p>Saat ini kami fokus menyediakan materi gratis, tapi pelatihan berbayar akan kami umumkan jika tersedia.</p>
+    </details>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta">
+    <div class="container">
+      <h2>Bergabunglah dengan Komunitas Kami</h2>
+      <p>Mulai perjalananmu bersama kami dan jadi bagian dari ekosistem Linux Indonesia.</p>
+      <a href="#" class="btn-secondary">🚀 Gabung Sekarang</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="kontak">
+    <div class="container footer-container">
+      <p>&copy; 2025 Linux Community ID — Dibangun dengan semangat open source 🐧</p>
+      <p>
+        Hubungi kami: <a href="mailto:sataniccybereteam@gmail.com">info@linuxcommunity.id</a> |
+        <a href="https://twitter.com/unknown1337" target="_blank" rel="noopener noreferrer">Twitter</a> |
+        <a href="https://github.com/Psychoh4x0r" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/theme-switcher.js"></script>
+  <script>
+    // Mobile menu toggle script
+    const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', !isHidden);
+      mobileMenu.setAttribute('aria-hidden', isHidden ? 'false' : 'true');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tips Optimasi Server Linux Lengkap - Linux Community ID</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/themes.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar" role="banner">
+    <div class="container navbar-container">
+      <div class="logo" aria-label="Linux Community ID Logo">
+        <a href="../index.html">
+          <img src="../assets/images/logo.svg" alt="Linux Community Logo" height="40" />
+          <span>Linux Community ID</span>
+        </a>
+      </div>
+      <nav role="navigation" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link">Beranda</a></li>
+          <li><a href="#" class="nav-link">Artikel</a></li>
+          <li><a href="../about.html" class="nav-link">Tentang</a></li>
+          <li><a href="../index.html#faq" class="nav-link">FAQ</a></li>
+          <li><a href="../index.html#kontak" class="nav-link btn-primary">Kontak</a></li>
+          <li><button id="theme-toggle" aria-label="Toggle Dark Mode" class="btn-theme">🌓</button></li>
+        </ul>
+      </nav>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu" class="mobile-menu-btn">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container article-content" role="main">
+    <h1>Tips Optimasi Server Linux Lengkap</h1>
+    <p>Optimasi server Linux adalah kunci untuk memastikan sistem kamu cepat, aman, dan stabil. Berikut panduan lengkap langkah demi langkah, khusus untuk beberapa distro populer.</p>
+
+    <h2>1. Update Sistem dan Paket</h2>
+    <p>Selalu update sistem secara berkala agar keamanan dan performa terjaga.</p>
+    <ul>
+      <li><strong>Arch Linux</strong>:</li>
+      <pre><code>sudo pacman -Syu</code></pre>
+      <li><strong>Debian/Ubuntu</strong>:</li>
+      <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+      <li><strong>Fedora</strong>:</li>
+      <pre><code>sudo dnf upgrade --refresh</code></pre>
+    </ul>
+
+    <h2>2. Optimasi Memori dan Swap</h2>
+    <p>Atur swappiness dan cache pressure untuk memaksimalkan penggunaan RAM dan swap.</p>
+    <p>Edit file <code>/etc/sysctl.conf</code> dan tambahkan:</p>
+    <pre><code>vm.swappiness=10
+vm.vfs_cache_pressure=50
+</code></pre>
+    <p>Aktifkan dengan:</p>
+    <pre><code>sudo sysctl -p</code></pre>
+
+    <h2>3. Pengaturan Firewall</h2>
+    <p>Gunakan firewall untuk batasi akses ke port yang tidak perlu.</p>
+    <ul>
+      <li><strong>Debian/Ubuntu (UFW):</strong></li>
+      <pre><code>sudo ufw enable
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw status</code></pre>
+      <li><strong>Fedora (firewalld):</strong></li>
+      <pre><code>sudo systemctl enable firewalld
+sudo systemctl start firewalld
+sudo firewall-cmd --permanent --add-service=ssh
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all</code></pre>
+      <li><strong>Arch Linux (iptables/nftables):</strong>  
+        Sesuaikan sesuai kebutuhan, contoh pakai nftables:
+      </li>
+      <pre><code>sudo pacman -S nftables
+sudo systemctl enable nftables
+sudo systemctl start nftables
+# Konfigurasi dasar nftables bisa dibuat di /etc/nftables.conf</code></pre>
+    </ul>
+
+    <h2>4. Optimasi Web Server</h2>
+    <p>Konfigurasi Apache atau Nginx agar server web kamu lebih cepat dan hemat sumber daya.</p>
+    <ul>
+      <li><strong>Apache:</strong></li>
+      <pre><code># Gunakan MPM Event untuk performa lebih baik
+sudo a2dismod mpm_prefork
+sudo a2enmod mpm_event
+sudo systemctl restart apache2
+
+# Aktifkan caching mod_cache dan mod_expires
+sudo a2enmod cache cache_disk expires headers
+sudo systemctl restart apache2
+</code></pre>
+      <li><strong>Nginx:</strong></li>
+      <pre><code># Edit /etc/nginx/nginx.conf
+worker_processes auto;
+events {
+  worker_connections 1024;
+}
+http {
+  gzip on;
+  gzip_types text/plain application/xml application/json text/css application/javascript;
+  # caching dan optimasi lain...
+}</code></pre>
+    </ul>
+
+    <h2>5. Monitoring Server</h2>
+    <p>Gunakan tools monitoring untuk cek kesehatan server.</p>
+    <ul>
+      <li><code>htop</code> - monitor proses dan resource realtime.</li>
+      <li><code>iotop</code> - cek penggunaan disk IO.</li>
+      <li><code>netstat</code> / <code>ss</code> - cek koneksi jaringan.</li>
+      <li><code>journalctl</code> - baca log sistem.</li>
+      <li><code>glances</code> - monitoring lengkap berbasis terminal.</li>
+    </ul>
+
+    <h2>6. Optimasi Disk dan Filesystem</h2>
+    <p>Gunakan filesystem yang sesuai dan tuning mount options.</p>
+    <ul>
+      <li><strong>Ext4:</strong> Gunakan opsi <code>noatime</code> untuk kurangi write disk:
+        <pre><code>/dev/sdX1 / ext4 defaults,noatime 0 1</code></pre>
+      </li>
+      <li><strong>Btrfs / XFS:</strong> Sesuaikan dengan kebutuhan dan tipe workload.</li>
+      <li>Gunakan RAID untuk redundancy dan performa jika memungkinkan.</li>
+    </ul>
+
+    <h2>7. Network Optimization</h2>
+    <p>Tuning TCP/IP stack agar koneksi jaringan lebih efisien.</p>
+    <pre><code># Tambahkan di /etc/sysctl.conf
+net.core.rmem_max=16777216
+net.core.wmem_max=16777216
+net.ipv4.tcp_rmem=4096 87380 16777216
+net.ipv4.tcp_wmem=4096 65536 16777216
+net.ipv4.tcp_congestion_control=bbr
+</code></pre>
+    <p>Aktifkan dengan:</p>
+    <pre><code>sudo sysctl -p</code></pre>
+
+    <h2>8. Otomatisasi dan Cron Job</h2>
+    <p>Gunakan skrip otomatis dan cron untuk maintenance rutin.</p>
+    <pre><code># Contoh backup harian dengan cron
+0 3 * * * /usr/local/bin/backup.sh
+</code></pre>
+    <p>Pastikan skrip <code>backup.sh</code> memiliki izin dan diuji dengan baik.</p>
+
+    <h2>9. Optimasi Khusus Distro</h2>
+    <h3>Arch Linux</h3>
+    <ul>
+      <li>Gunakan <code>systemd-boot</code> untuk boot yang lebih cepat.</li>
+      <li>Minimalisasi layanan dengan <code>systemctl disable nama_layanan</code>.</li>
+      <li>Gunakan <code>reflector</code> untuk mirror yang cepat dan up-to-date.</li>
+      <pre><code>sudo pacman -S reflector
+sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+</code></pre>
+    </ul>
+
+    <h3>Debian/Ubuntu</h3>
+    <ul>
+      <li>Gunakan <code>apt-fast</code> untuk mempercepat update dan install paket.</li>
+      <li>Gunakan <code>unattended-upgrades</code> untuk update keamanan otomatis.</li>
+      <li>Nonaktifkan layanan yang tidak dibutuhkan dengan <code>systemctl disable</code>.</li>
+    </ul>
+
+    <h3>Fedora</h3>
+    <ul>
+      <li>Gunakan <code>dnf-automatic</code> untuk update otomatis.</li>
+      <li>Optimasi SELinux jika tidak perlu gunakan mode permissive.</li>
+      <li>Gunakan <code>systemd-analyze blame</code> untuk cek startup services lambat.</li>
+    </ul>
+
+    <h2>10. Keamanan Server</h2>
+    <p>Pastikan server aman dengan langkah berikut:</p>
+    <ul>
+      <li>Gunakan SSH key authentication dan nonaktifkan password login.</li>
+      <li>Batasi akses root dan gunakan sudo.</li>
+      <li>Pasang Fail2Ban untuk mencegah brute force attack.</li>
+      <li>Update rutin dan patch keamanan.</li>
+    </ul>
+
+    <h2>11. Backup dan Recovery</h2>
+    <p>Jangan lupa backup data secara rutin dan uji proses recovery.</p>
+    <ul>
+      <li>Gunakan tools seperti <code>rsync</code>, <code>borgbackup</code>, atau <code>restic</code>.</li>
+      <li>Backup simpan di lokasi terpisah dan aman.</li>
+      <li>Otomatisasi backup dengan cron.</li>
+    </ul>
+
+    <p><a href="../index.html" class="btn-secondary">← Kembali ke Beranda</a></p>
+  </main>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script>
+    // Mobile menu toggle script
+    const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', !isHidden);
+      mobileMenu.setAttribute('aria-hidden', isHidden ? 'false' : 'true');
+    });
+  </script>
+</body>
+</html>
